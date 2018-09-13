@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="main.js"></script>
+    <style>
+        /* start CSS variables */
+        :root {
+            --colorVariable: #FEC52E;
+            --spacingVariable: 10px;
+            --sizeVariable: 50px;
+        }
+
+        .colorBox {
+            background: var(--colorVariable);
+            margin: var(--spacingVariable);
+            height: var(--sizeVariable);
+            width: var(--sizeVariable);
+        }
+
+        h1 {
+            color: var(--colorVariable)
+        }
+
+        /* end CSS variables */
+
+        body {
+            background-color: #193448;
+        }
+
+        .controls {
+            color: white;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <h1>
+            Update CSS Variables with JavaScript
+        </h1>
+    </div>
+    <div class="controls">
+        <div>
+            <label class="label" for="colorVariable">Color</label>
+            <div>
+                <input type="color" name="colorVariable" value="#FEC52E">
+            </div>
+        </div>
+        <div>
+            <label class="label" for="spacingVariable">Spacing</label>
+            <div>
+                <input type="range" min="0" max="50" name="spacingVariable" value="10" data-sizing="px")>
+            </div>
+        </div>
+        <div>
+            <label class="label" for="sizeVariable">Size</label>
+            <div>
+                <input type="range" min="10" max="200" name="sizeVariable" value="10" data-sizing="px")>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="colorBox">
+    </div>
+    <div class="colorBox">
+    </div>
+
+    <script>
+        const inputs = document.querySelectorAll('.controls input');
+        function handleUpdate() {
+            const suffix = this.dataset.sizing || '';
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+            console.log(suffix);
+            console.log(`${this.name} value updated to ${this.value}`);
+
+        }
+        inputs.forEach(input => {
+            input.addEventListener('change', handleUpdate);
+  
+        });
+        inputs.forEach(input => {
+            input.addEventListener('mousemove', handleUpdate);
+        });
+    </script>
+
+</body>
+
+</html>
